@@ -6,10 +6,6 @@ const TABLE_NAME = 'todo';
 //todo model
 class Todo {
   
-  constructor(){
-
-  }
-
   fetchAll(){
     return knex(TABLE_NAME)
       .select();

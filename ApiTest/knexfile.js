@@ -10,14 +10,14 @@ module.exports = {
       charset: 'utf8',
       timezone: 'UTC'
     },
-    debug :true,
-  //   migrations: {
-  //     tableName: 'migrations',
-  //     directory: './migrations',
-  //     stub: './stubs/migration.stub'
-  //   },
-  //   seeds: {
-  //     directory: './seeds',
-  //     stub: './stubs/seed.stub'
-  //   }
+    // debug :true,
+ /*    migrations: {
+      tableName: 'migrations',
+      directory: './migrations',
+      stub: './stubs/migration.stub'
+    },
+    seeds: {
+      directory: './seeds',
+      stub: './stubs/seed.stub'
+    } */
   };
