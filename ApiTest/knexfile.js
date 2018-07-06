@@ -10,6 +10,7 @@ module.exports = {
       charset: 'utf8',
       timezone: 'UTC'
     },
+    debug :true,
   //   migrations: {
   //     tableName: 'migrations',
   //     directory: './migrations',

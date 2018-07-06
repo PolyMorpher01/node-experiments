@@ -2,7 +2,6 @@ const knex = require('../db');
 
 const TABLE_NAME = 'todo';
 
-const db = knex(TABLE_NAME);
 
 //todo model
 class Todo {
@@ -12,29 +11,29 @@ class Todo {
   }
 
   fetchAll(){
-    return db
+    return knex(TABLE_NAME)
       .select();
   }
 
   fetchById(id){
-    return db
+    return knex(TABLE_NAME)
       .select()
       .where('id',id);
   }
 
   create(obj){
-    return db
+    return knex(TABLE_NAME)
       .insert(obj);
   }
 
   update(id,obj){
-    return db
+    return knex(TABLE_NAME)
       .update(obj)
       .where('id',id);
   }
 
   delete(id){
-    return db
+    return knex(TABLE_NAME)
     .del()
     .where('id',id);
   }
