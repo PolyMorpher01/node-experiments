@@ -9,12 +9,10 @@ const PORT = 3000;
 const app = express();
 const router = express.Router();
 
+
 app.use(express.json());
 app.use(express.urlencoded());
 app.use(bodyParser.json());
-
-// app.use(router);
-
 
 
 // API Routes
