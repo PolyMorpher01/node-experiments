@@ -14,7 +14,8 @@ class Todo {
   fetchById(id){
     return knex(TABLE_NAME)
       .select()
-      .where('id',id);
+      .where('id',id)
+      .first();
   }
 
   create(obj){

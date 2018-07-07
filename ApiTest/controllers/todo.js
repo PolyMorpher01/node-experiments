@@ -23,12 +23,7 @@ router.get('/', (req, res) => {
 router.get('/:id', (req, res) => {
     todoService
         .getById(req.params.id)
-        .then((data)=>{
-
-            if(data.length === 0){
-                res.end("Item does not exist");
-            }
-            
+        .then((data)=>{            
             res.json(data);
         })
         .catch((err)=>{

@@ -6,8 +6,13 @@ module.exports = {
         return model.fetchAll();
     },
 
-    getById(id){
-        return model.fetchById(id);
+    getById(id){        
+        return model.fetchById(id)
+        .then((data)=>{
+            if(!data){
+                throw ('Item does not exist');
+            }
+        });
     },
 
     createItem(obj){
