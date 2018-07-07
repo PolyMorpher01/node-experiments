@@ -1,4 +1,4 @@
-const model = require('../models/todo');
+const model = require('../models/Todo');
 
 module.exports = {
 

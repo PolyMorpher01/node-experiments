@@ -4,5 +4,3 @@ const knexConfing = require('./knexfile');
 const knex = knexJs(knexConfing);
 
 module.exports = knex;
-
-
