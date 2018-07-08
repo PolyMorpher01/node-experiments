@@ -1,4 +1,4 @@
-const env = require('./env.js');
+const env = require('./env');
 //database configuration
 module.exports = {
     client: process.env.DB_CLIENT,
@@ -12,13 +12,4 @@ module.exports = {
       timezone: 'UTC'
     },
     // debug :true,
- /*    migrations: {
-      tableName: 'migrations',
-      directory: './migrations',
-      stub: './stubs/migration.stub'
-    },
-    seeds: {
-      directory: './seeds',
-      stub: './stubs/seed.stub'
-    } */
   };
