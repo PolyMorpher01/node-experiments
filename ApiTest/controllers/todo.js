@@ -4,13 +4,39 @@ const todoService = require('../services/todoService');
 
 const router = express.Router();
 
+const jwt = require('jsonwebtoken');
+const ACCESS_TOKEN_SALT = "ayush";
 
-//GET: /api/todo/
-router.get('/', (req, res) => {
+const verifyAccessToken =  function (jwtToken) {
+    try{
+        jwt.verify(jwtToken, ACCESS_TOKEN_SALT);
+        return true;
+    }
+    catch(err){
+        console.log(err);
+        return false;
+    }
+  }
+
+
+
+//GET: /api/todos/
+router.get('/',(req, res, next)=>{
+    const token = req.get('authorization');
+
+    if(verifyAccessToken(token)){
+        next();
+        return
+    }
+    res.status(401);
+    res.end('Access Denied');
+
+}, (req, res) => {
+    
     todoService
         .getAllList()
         .then((data)=>{
-            res.json(data);
+            res.json(data);        
         })
         .catch((err)=>{
             res.status(500);
@@ -19,7 +45,7 @@ router.get('/', (req, res) => {
 });
 
 
-//GET: /api/todo/id
+//GET: /api/todos/id
 router.get('/:id', (req, res) => {
     todoService
         .getById(req.params.id)
@@ -34,7 +60,7 @@ router.get('/:id', (req, res) => {
 
 
 
-//POST: /api/todo/
+//POST: /api/todos/
 router.post('/', (req, res) => {
     todoService
         .createItem(req.body)
@@ -49,7 +75,7 @@ router.post('/', (req, res) => {
 
 
 
-//PUT: /api/todo/:id
+//PUT: /api/todos/:id
 router.put('/:id', (req, res) => {
     todoService
         .updateItem(req.params.id, req.body)
@@ -64,7 +90,7 @@ router.put('/:id', (req, res) => {
 
 
 
-//DELETE: /api/todo/:id
+//DELETE: /api/todos/:id
 router.delete('/:id', (req, res) => {
     todoService
    .deleteItem(req.params.id)

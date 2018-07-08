@@ -1,4 +1,5 @@
-const model = require('../models/Todos');
+const model = require('../models/Users');
+const cryptUtils = require('../utils/crypt');
 
 module.exports = {
 
@@ -17,7 +18,8 @@ module.exports = {
     },
 
     createItem(obj){
-        return model.create(obj);
+        obj.password = cryptUtils.encrypt(obj.password);
+        return model.create(obj)
     },
     
     updateItem(id,obj){
