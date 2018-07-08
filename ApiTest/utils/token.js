@@ -27,5 +27,12 @@ module.exports = {
     );
 
     return refreshToken;
+  },
+
+  verifyAccessToken(jwtToken) {
+      return jwt.verify(jwtToken, ACCESS_TOKEN_SALT);
   }
+
 };
+
+
