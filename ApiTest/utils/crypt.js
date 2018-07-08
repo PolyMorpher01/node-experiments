@@ -4,7 +4,7 @@ const env = require('../env');
 
 module.exports = {
   encrypt(data) {
-    const SALT = bcrypt.genSaltSync(process.env.SALT_WORK_FACTOR);
+    const SALT = bcrypt.genSaltSync(10);
     return bcrypt.hashSync(data, SALT);
   },
 
@@ -12,4 +12,3 @@ module.exports = {
     return bcrypt.compareSync(data, source);
   }
 };
-s
