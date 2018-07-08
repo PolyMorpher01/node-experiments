@@ -21,9 +21,10 @@ router.post('/', (req, res) => {
 //POST: /api/auth/refresh
 router.post('/refresh', (req, res) => {
   const refreshToken = req.body.token;
+  const user_id = req.body.user_id;
 
   authService
-    .refresh(refreshToken)
+    .refresh(refreshToken, user_id)
     .then(data => {
       res.json(data);
     })

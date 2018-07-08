@@ -19,7 +19,6 @@ module.exports = {
 
       return userTokensModel.create(userTokenJson).then(() => {
         const isMatch = cryptUtils.dcrypt(loginParams.password, data.password);
-        console.log(isMatch);
         if (isMatch) {
           return {
             authToken,
@@ -32,27 +31,30 @@ module.exports = {
     });
   },
 
-  async refresh(refreshToken) {
-    try {
-      const { data } = tokenUtils.verifyRefreshToken(refreshToken);
-      const userJson = data.payload;
+  refresh(refreshToken, user_id) {
+    return userModel.fetchById(user_id).then(data => {
+      const userJson = data;
 
-      const token = tokenUtils.generateAuthTokens(userJson);
+      if (!userJson) {
+        throw 'User does not exist';
+      }
 
-      return {
-        token
-      };
+      return userTokensModel.fetchByToken(refreshToken).then(data => {
+        if (data) {
+          const newToken = tokenUtils.generateAuthTokens(userJson);
+          return { newToken };
+        }
 
-    } catch (err) {
-      throw 'Invalid Token';
-    }
+        throw 'Invalid Token';
+      });
+    });
   },
 
-  logOut(user_id){
-    return userTokensModel.delete(user_id).then((data)=>{
-      if(!data){
+  logOut(user_id) {
+    return userTokensModel.delete(user_id).then(data => {
+      if (!data) {
         throw 'User is not logged in';
       }
-    })
+    });
   }
 };
