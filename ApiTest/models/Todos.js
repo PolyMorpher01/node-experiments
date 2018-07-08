@@ -3,7 +3,6 @@ const knex = require('../db');
 const TABLE_NAME = 'todos';
 
 
-//todo model
 class Todos {
   
   fetchAll(){

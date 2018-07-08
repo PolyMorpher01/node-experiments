@@ -2,7 +2,7 @@ const knex = require('../db');
 
 const TABLE_NAME = 'users';
 
-//users model
+
 class Users {
   
     fetchAll(){
