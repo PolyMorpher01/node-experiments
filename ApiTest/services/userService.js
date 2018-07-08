@@ -11,7 +11,7 @@ module.exports = {
         return model.fetchById(id)
         .then((data)=>{
             if(!data){
-                throw ('Item does not exist');
+                throw ('User does not exist');
             }
             return data;
         });
