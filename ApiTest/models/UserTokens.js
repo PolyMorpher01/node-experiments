@@ -14,10 +14,10 @@ class UserTokens {
     return knex(TABLE_NAME).insert(obj);
   }
 
-  delete(id) {
+  delete(user_id) {
     return knex(TABLE_NAME)
       .del()
-      .where('id', id);
+      .where('user_id', user_id);
   }
 }
 
