@@ -6,7 +6,7 @@ function authenticate(req, res, next) {
   const accessToken = req.get('authorization');
   try {
     tokenUtils.verifyAccessToken(accessToken);
-    next();    
+    next();
   } catch (err) {
     res.status(401);
     res.end('Access Denied');

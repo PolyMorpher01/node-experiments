@@ -12,3 +12,4 @@ module.exports = {
     return bcrypt.compareSync(data, source);
   }
 };
+s

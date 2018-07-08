@@ -1,5 +1,5 @@
 const jwt = require('jsonwebtoken');
-const env = require('../env')
+const env = require('../env');
 
 const ACCESS_TOKEN_EXPIRY = process.env.ACCESS_TOKEN_EXPIRY;
 const ACCESS_TOKEN_SALT = process.env.ACCESS_TOKEN_SALT;
@@ -30,9 +30,6 @@ module.exports = {
   },
 
   verifyAccessToken(jwtToken) {
-      return jwt.verify(jwtToken, ACCESS_TOKEN_SALT);
+    return jwt.verify(jwtToken, ACCESS_TOKEN_SALT);
   }
-
 };
-
-

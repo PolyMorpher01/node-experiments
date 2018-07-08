@@ -13,7 +13,7 @@ exports.up = function(knex, Promise) {
         table.string('email')
             .unique()
             .notNull();
-        table.string('uname')
+        table.string('user_name')
             .unique()
             .notNull();
         table.string('password').notNull();

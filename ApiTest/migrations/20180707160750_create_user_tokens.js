@@ -2,7 +2,7 @@
 exports.up = function(knex, Promise) {
     return knex.schema.createTable('user_tokens', table => {
         table.increments();
-        table.integer('userId').notNull().index().references('id').inTable('users');//todo small case
+        table.integer('user_id').notNull().index().references('id').inTable('users');
         table.text('token').notNull();
     }); 
 };
