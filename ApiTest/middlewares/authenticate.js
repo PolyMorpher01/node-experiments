@@ -9,9 +9,6 @@ function authenticate(req, res, next) {
     tokenUtils.verifyAccessToken(accessToken);
     next();
   } catch (err) {
-    if(err.name === 'TokenExpiredError'){ 
-      res.end('Token Expired');
-    }
     res.status(401);
     res.end('Access Denied');
   }
