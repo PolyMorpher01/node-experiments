@@ -55,6 +55,7 @@ module.exports = {
       if (!data) {
         throw 'User is not logged in';
       }
+      return
     });
   }
 };
