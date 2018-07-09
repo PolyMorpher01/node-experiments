@@ -53,7 +53,7 @@ module.exports = {
   logOut(tokenObj) {
     return userTokensModel.deleteByToken(tokenObj.token).then(data => {
       if (!data) {
-        throw 'User is not logged in';
+        throw 'Token invalid';
       }
       return
     });
