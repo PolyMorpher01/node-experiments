@@ -8,6 +8,7 @@ exports.up = function(knex, Promise) {
       .references('id')
       .inTable('users');
     table.text('token').notNull();
+    table.timestamps(true, true);
   });
 };
 
