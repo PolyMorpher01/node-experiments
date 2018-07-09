@@ -1,13 +1,13 @@
-const model = require('../models/Users');
+const userModel = require('../models/Users');
 const cryptUtils = require('../utils/crypt');
 
 module.exports = {
   getAllList() {
-    return model.fetchAll();
+    return userModel.fetchAll();
   },
 
   getById(id) {
-    return model.fetchById(id).then(data => {
+    return userModel.fetchById(id).then(data => {
       if (!data) {
         throw 'User does not exist';
       }
@@ -17,14 +17,14 @@ module.exports = {
 
   createItem(obj) {
     obj.password = cryptUtils.encrypt(obj.password);
-    return model.create(obj);
+    return userModel.create(obj);
   },
 
   updateItem(id, obj) {
-    return model.update(id, obj);
+    return userModel.update(id, obj);
   },
 
   deleteItem(id) {
-    return model.delete(id);
+    return userModel.delete(id);
   }
 };
