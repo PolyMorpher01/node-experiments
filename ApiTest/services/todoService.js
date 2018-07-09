@@ -1,12 +1,13 @@
-const model = require('../models/Todos');
+const todoModel = require('../models/Todos');
+const userModel = require('../models/Users');
 
 module.exports = {
   getAllList() {
-    return model.fetchAll();
+    return todoModel.fetchAll();
   },
 
   getById(id) {
-    return model.fetchById(id).then(data => {
+    return todoModel.fetchById(id).then(data => {
       if (!data) {
         throw 'Item does not exist';
       }
@@ -15,14 +16,24 @@ module.exports = {
   },
 
   createItem(obj) {
-    return model.create(obj);
+    return userModel.fetchByUserName(obj.user_name).then(data => {
+      const userData = data;
+      if (!userData) {
+        throw 'User does not exist';
+      }
+
+      delete obj.user_name;
+      obj.user_id = userData.id;
+
+      return todoModel.create(obj);
+    });
   },
 
   updateItem(id, obj) {
-    return model.update(id, obj);
+    return todoModel.update(id, obj);
   },
 
   deleteItem(id) {
-    return model.delete(id);
+    return todoModel.delete(id);
   }
 };
