@@ -50,8 +50,8 @@ module.exports = {
     });
   },
 
-  logOut(user_id) {
-    return userTokensModel.delete(user_id).then(data => {
+  logOut(tokenObj) {
+    return userTokensModel.deleteByToken(tokenObj.token).then(data => {
       if (!data) {
         throw 'User is not logged in';
       }

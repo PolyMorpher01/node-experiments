@@ -34,11 +34,11 @@ router.post('/refresh', (req, res) => {
     });
 });
 
-//TODO better way than user_id
-//GET: /api/auth/logout/user_id
-router.get('/logout/:user_id', authenticate, (req, res) => {
+
+//POST: /api/auth/logout
+router.post('/logout/', authenticate, (req, res) => {
   authService
-    .logOut(req.params.user_id)
+    .logOut(req.body)
     .then(data => {
       res.json('Logged out successfully!');
     })
