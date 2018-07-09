@@ -2,7 +2,6 @@ const jwt = require('jsonwebtoken');
 
 const tokenUtils = require('../utils/token');
 
-
 function authenticate(req, res, next) {
   const accessToken = req.get('authorization');
   try {

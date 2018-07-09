@@ -1,8 +1,6 @@
 const bcrypt = require('bcrypt');
 
-const env = require('../env');
-
-const SALT_FACTOR = parseInt(process.env.SALT_FACTOR)
+const SALT_FACTOR = parseInt(process.env.SALT_FACTOR);
 
 module.exports = {
   encrypt(data) {
