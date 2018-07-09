@@ -1,12 +1,16 @@
-
 exports.up = function(knex, Promise) {
-    return knex.schema.createTable('user_tokens', table => {
-        table.increments();
-        table.integer('user_id').notNull().index().references('id').inTable('users');
-        table.text('token').notNull();
-    }); 
+  return knex.schema.createTable('user_tokens', table => {
+    table.increments();
+    table
+      .integer('user_id')
+      .notNull()
+      .index()
+      .references('id')
+      .inTable('users');
+    table.text('token').notNull();
+  });
 };
 
 exports.down = function(knex, Promise) {
-    return knex.schema.dropTable('user_tokens');
+  return knex.schema.dropTable('user_tokens');
 };

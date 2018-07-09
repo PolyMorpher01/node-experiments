@@ -1,5 +1,5 @@
 exports.up = function(knex, Promise) {
-  return knex.schema.createTable('todos', table => {
+  return knex.schema.createTable('users', table => {
     table.increments();
     table
       .timestamp('created_at')
@@ -9,20 +9,18 @@ exports.up = function(knex, Promise) {
       .timestamp('updated_at')
       .notNull()
       .defaultTo(knex.raw('now()'));
-    table.string('task').notNull();
     table
-      .bool('is_completed')
-      .notNull()
-      .defaultTo(false);
+      .string('email')
+      .unique()
+      .notNull();
     table
-      .integer('user_id')
-      .notNull()
-      .index()
-      .references('id')
-      .inTable('users');
+      .string('user_name')
+      .unique()
+      .notNull();
+    table.string('password').notNull();
   });
 };
 
 exports.down = function(knex, Promise) {
-  return knex.schema.dropTable('todos');
+  return knex.schema.dropTable('users');
 };
