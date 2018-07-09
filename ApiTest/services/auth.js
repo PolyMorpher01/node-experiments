@@ -30,8 +30,8 @@ function checkLogin(loginParams) {
   });
 }
 
-function refresh(refreshToken, user_id) {
-  return userModel.fetchById(user_id).then(data => {
+function refresh(refreshToken, userId) {
+  return userModel.fetchById(userId).then(data => {
     const userJson = data;
 
     if (!userJson) {

@@ -15,8 +15,14 @@ function getById(id) {
 }
 
 function createItem(obj) {
-  obj.password = cryptUtils.encrypt(obj.password);
-  return userModel.create(obj);
+  hasedPassword = cryptUtils.encrypt(obj.password);
+
+  const userObj = {
+    user_name: obj.userName,
+    password: hasedPassword,
+    email: obj.email
+  };
+  return userModel.create(userObj);
 }
 
 function updateItem(id, obj) {
@@ -33,4 +39,4 @@ module.exports = {
   createItem,
   updateItem,
   deleteItem
-}
+};

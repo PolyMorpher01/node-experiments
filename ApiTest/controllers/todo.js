@@ -1,6 +1,6 @@
 const express = require('express');
 
-const todoService = require('../services/todoService');
+const todoService = require('../services/todo');
 const { authenticate } = require('../middlewares/authenticate');
 
 const router = express.Router();

@@ -1,12 +1,12 @@
 const express = require('express');
 
-const authService = require('../services/authService');
+const authService = require('../services/auth');
 const { authenticate } = require('../middlewares/authenticate');
 
 const router = express.Router();
 
-//POST: /api/auth/
-router.post('/', (req, res) => {
+//POST: /api/auth/login
+router.post('/login', (req, res) => {
   authService
     .checkLogin(req.body)
     .then(data => {
@@ -21,10 +21,10 @@ router.post('/', (req, res) => {
 //POST: /api/auth/refresh
 router.post('/refresh', (req, res) => {
   const refreshToken = req.body.token;
-  const user_id = req.body.user_id;
+  const userId = req.body.userId;
 
   authService
-    .refresh(refreshToken, user_id)
+    .refresh(refreshToken, userId)
     .then(data => {
       res.json(data);
     })
@@ -36,11 +36,11 @@ router.post('/refresh', (req, res) => {
 
 
 //POST: /api/auth/logout
-router.post('/logout/', authenticate, (req, res) => {
+router.post('/logout', authenticate, (req, res) => {
   authService
     .logOut(req.body)
     .then(data => {
-      res.json('Logged out successfully!');
+      res.send('Logged out successfully!');
     })
     .catch(err => {
       res.status(500);
