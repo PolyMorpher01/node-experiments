@@ -1,4 +1,5 @@
 const jwt = require('jsonwebtoken');
+const Boom = require('boom');
 
 const tokenUtils = require('../utils/token');
 
@@ -8,8 +9,7 @@ function authenticate(req, res, next) {
     tokenUtils.verifyAccessToken(accessToken);
     next();
   } catch (err) {
-    res.status(401);
-    res.end('Access Denied');
+    next(Boom.unauthorized('Access Denied'))
   }
 }
 
