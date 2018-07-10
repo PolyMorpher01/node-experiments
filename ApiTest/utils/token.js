@@ -1,8 +1,8 @@
 const jwt = require('jsonwebtoken');
 
 const ACCESS_TOKEN_EXPIRY = parseInt(process.env.ACCESS_TOKEN_EXPIRY) * 60;
-const ACCESS_TOKEN_SALT = process.env.ACCESS_TOKEN_SALT;
-const REFRESH_TOKEN_SALT = process.env.REFRESH_TOKEN_SALT;
+const ACCESS_TOKEN_SECRET = process.env.ACCESS_TOKEN_SECRET;
+const REFRESH_TOKEN_SECRET = process.env.REFRESH_TOKEN_SECRET;
 
 module.exports = {
   generateAuthTokens(encryptedData) {
@@ -10,7 +10,7 @@ module.exports = {
       {
         data: { payLoad: encryptedData }
       },
-      ACCESS_TOKEN_SALT,
+      ACCESS_TOKEN_SECRET,
       { expiresIn: ACCESS_TOKEN_EXPIRY }
     );
     return accessToken;
@@ -21,7 +21,7 @@ module.exports = {
       {
         data: { payload: encryptedData }
       },
-      REFRESH_TOKEN_SALT
+      REFRESH_TOKEN_SECRET
     );
 
     return refreshToken;

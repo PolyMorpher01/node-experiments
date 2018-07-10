@@ -49,8 +49,8 @@ function refresh(refreshToken, userId) {
   });
 }
 
-function logOut(tokenObj) {
-  return userTokensModel.deleteByToken(tokenObj.token).then(data => {
+function logOut(obj) {
+  return userTokensModel.deleteByToken(obj.token).then(data => {
     if (!data) {
       throw 'Token invalid';
     }
