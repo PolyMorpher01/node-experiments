@@ -3,18 +3,12 @@ const Boom = require('boom');
 const todoModel = require('../models/Todos');
 const tokenUtils = require('../utils/token');
 
-function getAllList(accessToken) {
-  const tokenData = tokenUtils.verifyAccessToken(accessToken);
-  const userObj = tokenData.data.payLoad;
-
-  return todoModel.fetchAll(userObj.id);
+function getAllList(userID) {
+  return todoModel.fetchAll(userID);
 }
 
-function getById(id, accessToken) {
-  const tokenData = tokenUtils.verifyAccessToken(accessToken);
-  const userObj = tokenData.data.payLoad;
-
-  return todoModel.fetchById(id, userObj.id).then(data => {
+function getById(id, userID) {
+  return todoModel.fetchById(id, userID).then(data => {
     if (!data) {
       throw Boom.badRequest('Item does not exist');
     }
@@ -22,31 +16,22 @@ function getById(id, accessToken) {
   });
 }
 
-function createItem(obj, accessToken) {
-  const tokenData = tokenUtils.verifyAccessToken(accessToken);
-  const userObj = tokenData.data.payLoad;
-
+function createItem(obj, userID) {
   const todoObj = {
     id: obj.id,
     task: obj.task,
     is_completed: obj.is_completed,
-    user_id: userObj.id
+    user_id: userID
   };
   return todoModel.create(todoObj);
 }
 
-function updateItem(id, obj, accessToken) {
-  const tokenData = tokenUtils.verifyAccessToken(accessToken);
-  const userObj = tokenData.data.payLoad;
-
-  return todoModel.update(id, obj, userObj.id);
+function updateItem(id, obj, userID) {
+  return todoModel.update(id, obj, userID);
 }
 
-function deleteItem(id, accessToken) {
-  const tokenData = tokenUtils.verifyAccessToken(accessToken);
-  const userObj = tokenData.data.payLoad;
-
-  return todoModel.delete(id, userObj.id);
+function deleteItem(id, userID) {
+  return todoModel.delete(id, userID);
 }
 
 module.exports = {
