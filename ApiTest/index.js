@@ -17,7 +17,6 @@ app.use('/api', routes);
 
 //Error Middlewares
 app.use(errorHandler.generic);
-app.use(errorHandler.notAllowed);
 
 const PORT = process.env.APP_PORT;
 app.listen(PORT, () => {
