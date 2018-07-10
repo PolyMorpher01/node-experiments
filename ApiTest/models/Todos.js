@@ -3,14 +3,17 @@ const knex = require('../db');
 const TABLE_NAME = 'todos';
 
 class Todos {
-  fetchAll() {
-    return knex(TABLE_NAME).select();
+  fetchAll(userID) {
+    return knex(TABLE_NAME)
+      .select()
+      .where('user_id', userID);
   }
 
-  fetchById(id) {
+  fetchById(id, userID) {
     return knex(TABLE_NAME)
       .select()
       .where('id', id)
+      .where('user_id', userID)
       .first();
   }
 
@@ -18,16 +21,18 @@ class Todos {
     return knex(TABLE_NAME).insert(obj);
   }
 
-  update(id, obj) {
+  update(id, obj, userID) {
     return knex(TABLE_NAME)
       .update(obj)
-      .where('id', id);
+      .where('id', id)
+      .where('user_id', userID);
   }
 
-  delete(id) {
+  delete(id, userID) {
     return knex(TABLE_NAME)
       .del()
-      .where('id', id);
+      .where('id', id)
+      .where('user_id', userID);
   }
 }
 

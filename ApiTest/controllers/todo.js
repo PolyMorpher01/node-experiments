@@ -7,8 +7,9 @@ const router = express.Router();
 
 //GET: /api/todos/
 router.get('/', authenticate, (req, res) => {
+  const accessToken = req.get('authorization');
   todoService
-    .getAllList()
+    .getAllList(accessToken)
     .then(data => {
       res.json(data);
     })
@@ -20,8 +21,9 @@ router.get('/', authenticate, (req, res) => {
 
 //GET: /api/todos/id
 router.get('/:id', authenticate, (req, res) => {
+  const accessToken = req.get('authorization');
   todoService
-    .getById(req.params.id)
+    .getById(req.params.id, accessToken)
     .then(data => {
       res.json(data);
     })
@@ -47,8 +49,9 @@ router.post('/', authenticate, (req, res) => {
 
 //PUT: /api/todos/:id
 router.put('/:id', authenticate, (req, res) => {
+  const accessToken = req.get('authorization');
   todoService
-    .updateItem(req.params.id, req.body)
+    .updateItem(req.params.id, req.body, accessToken)
     .then(data => {
       res.json(data);
     })
@@ -60,8 +63,9 @@ router.put('/:id', authenticate, (req, res) => {
 
 //DELETE: /api/todos/:id
 router.delete('/:id', authenticate, (req, res) => {
+  const accessToken = req.get('authorization');
   todoService
-    .deleteItem(req.params.id)
+    .deleteItem(req.params.id, accessToken)
     .then(data => {
       res.json(data);
     })
