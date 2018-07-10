@@ -32,7 +32,7 @@ function updateItem(id, obj) {
 }
 
 function deleteItem(id) {
-  return userModel.delete(id);
+  return userModel.deleteItem(id);
 }
 
 module.exports = {
