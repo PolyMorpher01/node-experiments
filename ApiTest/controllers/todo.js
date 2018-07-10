@@ -22,7 +22,7 @@ router.get('/:id', authenticate, (req, res, next) => {
 });
 
 //POST: /api/todos/
-router.post('/', authenticate, (req, res, next) => {  
+router.post('/', authenticate, (req, res, next) => {
   todoService
     .createItem(req.body, req.userId)
     .then(data => res.json(data))
@@ -30,7 +30,7 @@ router.post('/', authenticate, (req, res, next) => {
 });
 
 //PUT: /api/todos/:id
-router.put('/:id', authenticate, (req, res, next) => {  
+router.put('/:id', authenticate, (req, res, next) => {
   todoService
     .updateItem(req.params.id, req.body, req.userId)
     .then(data => res.json(data))
@@ -38,7 +38,7 @@ router.put('/:id', authenticate, (req, res, next) => {
 });
 
 //DELETE: /api/todos/:id
-router.delete('/:id', authenticate, (req, res, next) => {  
+router.delete('/:id', authenticate, (req, res, next) => {
   todoService
     .deleteItem(req.params.id, req.userId)
     .then(data => res.json(data))

@@ -24,7 +24,6 @@ router.post('/refresh', (req, res, next) => {
     .catch(err => next(err));
 });
 
-
 //POST: /api/auth/logout
 router.post('/logout', authenticate, (req, res, next) => {
   authService

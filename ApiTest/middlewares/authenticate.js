@@ -11,7 +11,7 @@ function authenticate(req, res, next) {
     req.userId = userObj.id;
     next();
   } catch (err) {
-    next(Boom.unauthorized('Access Denied'))
+    next(Boom.unauthorized('Access Denied'));
   }
 }
 
