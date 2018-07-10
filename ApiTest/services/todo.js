@@ -1,3 +1,5 @@
+const Boom = require('boom');
+
 const todoModel = require('../models/Todos');
 const tokenUtils = require('../utils/token');
 
@@ -14,7 +16,7 @@ function getById(id, accessToken) {
 
   return todoModel.fetchById(id, userObj.id).then(data => {
     if (!data) {
-      throw 'Item does not exist';
+      throw Boom.badRequest('Item does not exist');
     }
     return data;
   });

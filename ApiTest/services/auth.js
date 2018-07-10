@@ -1,3 +1,5 @@
+const Boom = require('boom');
+
 const userModel = require('../models/Users');
 const userTokensModel = require('../models/UserTokens');
 
@@ -7,7 +9,7 @@ const cryptUtils = require('../utils/crypt');
 function checkLogin(loginParams) {
   return userModel.fetchByUserName(loginParams.user_name).then(data => {
     if (!data) {
-      throw 'User does not exist';
+      throw Boom.badRequest('User does not exist');
     }
     const authToken = tokenUtils.generateAuthTokens(data);
     const refreshToken = tokenUtils.generateRefreshToken(data);
@@ -19,7 +21,7 @@ function checkLogin(loginParams) {
     return userTokensModel.create(userTokenJson).then(() => {
       const isMatch = cryptUtils.dcrypt(loginParams.password, data.password);
       if (!isMatch) {
-        throw 'password mismatch';
+        throw Boom.unauthorized('password mismatch');
       }
 
       return {
@@ -35,12 +37,12 @@ function refresh(refreshToken, userId) {
     const userJson = data;
 
     if (!userJson) {
-      throw 'User does not exist';
+      throw Boom.badRequest('User does not exist');
     }
 
     return userTokensModel.fetchByToken(refreshToken).then(data => {
       if (!data) {
-        throw 'Invalid Token';
+        throw Boom.unauthorized('Invalid Token');
       }
 
       const newToken = tokenUtils.generateAuthTokens(userJson);
@@ -52,7 +54,7 @@ function refresh(refreshToken, userId) {
 function logOut(obj) {
   return userTokensModel.deleteByToken(obj.token).then(data => {
     if (!data) {
-      throw 'Token invalid';
+      throw Boom.unauthorized('Token invalid');
     }
     return;
   });

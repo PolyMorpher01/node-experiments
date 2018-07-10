@@ -1,3 +1,5 @@
+const Boom = require('boom');
+
 const userModel = require('../models/Users');
 const cryptUtils = require('../utils/crypt');
 
@@ -8,7 +10,7 @@ function getAllList() {
 function getById(id) {
   return userModel.fetchById(id).then(data => {
     if (!data) {
-      throw 'User does not exist';
+      throw Boom.badRequest('User does not exist');
     }
     return data;
   });
