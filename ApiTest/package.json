@@ -2,15 +2,15 @@
   "name": "apitest",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "src/index.js",
   "scripts": {
-    "start": "supervisor index.js",
+    "start": "supervisor src/index.js",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "create:migration": "knex migrate:make",
-    "migrate": "knex migrate:latest",
-    "rollback": "knex migrate:rollback",
-    "make:seeder": "knex seed:make",
-    "seed": "knex seed:run"
+    "create:migration": "knex migrate:make --knexfile src/knexfile.js",
+    "migrate": "knex migrate:latest --knexfile src/knexfile.js",
+    "rollback": "knex migrate:rollback --knexfile src/knexfile.js",
+    "make:seeder": "knex seed:make --knexfile src/knexfile.js",
+    "seed": "knex seed:run --knexfile src/knexfile.js"
   },
   "author": "",
   "license": "ISC",

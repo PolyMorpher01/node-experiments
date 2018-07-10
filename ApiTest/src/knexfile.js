@@ -1,4 +1,5 @@
-const env = require('./env');
+const dotenv = require('dotenv').config({ path: `${__dirname}/../.env` });
+
 //database configuration
 module.exports = {
   client: process.env.DB_CLIENT,
