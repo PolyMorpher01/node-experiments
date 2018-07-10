@@ -28,10 +28,10 @@ module.exports = {
   },
 
   verifyAccessToken(jwtToken) {
-    return jwt.verify(jwtToken, ACCESS_TOKEN_SALT);
+    return jwt.verify(jwtToken, ACCESS_TOKEN_SECRET);
   },
 
   verifyRefreshToken(jwtToken) {
-    return jwt.verify(jwtToken, REFRESH_TOKEN_SALT);
+    return jwt.verify(jwtToken, REFRESH_TOKEN_SECRET);
   }
 };
