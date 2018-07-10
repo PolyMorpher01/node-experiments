@@ -33,8 +33,9 @@ router.get('/:id', authenticate, (req, res) => {
 
 //POST: /api/todos/
 router.post('/', authenticate, (req, res) => {
+  const accessToken = req.get('authorization');
   todoService
-    .createItem(req.body)
+    .createItem(req.body, accessToken)
     .then(data => {
       res.json(data);
     })

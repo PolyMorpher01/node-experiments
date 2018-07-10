@@ -1,5 +1,5 @@
 const todoModel = require('../models/Todos');
-const userModel = require('../models/Users');
+const tokenUtils = require('../utils/token');
 
 function getAllList() {
   return todoModel.fetchAll();
@@ -14,18 +14,21 @@ function getById(id) {
   });
 }
 
-function createItem(obj) {
-  return userModel.fetchByUserName(obj.user_name).then(data => {
-    const userData = data;
-    if (!userData) {
-      throw 'User does not exist';
-    }
+function createItem(obj, accessToken) {
+  const tokenData = tokenUtils.verifyAccessToken(accessToken);
+  if (!tokenData) {
+    throw 'Invalid Token';
+  }
 
-    delete obj.user_name;
-    obj.user_id = userData.id;
+  const userObj = tokenData.data.payLoad;
 
-    return todoModel.create(obj);
-  });
+  const todoObj = {
+    id: obj.id,
+    task: obj.task,
+    is_completed: obj.is_completed,
+    user_id: userObj.id
+  };
+  return todoModel.create(todoObj);
 }
 
 function updateItem(id, obj) {

@@ -18,14 +18,14 @@ function checkLogin(loginParams) {
 
     return userTokensModel.create(userTokenJson).then(() => {
       const isMatch = cryptUtils.dcrypt(loginParams.password, data.password);
-      if (isMatch) {
-        return {
-          authToken,
-          refreshToken
-        };
+      if (!isMatch) {
+        throw 'password mismatch';
       }
 
-      throw 'password mismatch';
+      return {
+        authToken,
+        refreshToken
+      };
     });
   });
 }
@@ -39,12 +39,12 @@ function refresh(refreshToken, userId) {
     }
 
     return userTokensModel.fetchByToken(refreshToken).then(data => {
-      if (data) {
-        const newToken = tokenUtils.generateAuthTokens(userJson);
-        return { newToken };
+      if (!data) {
+        throw 'Invalid Token';
       }
 
-      throw 'Invalid Token';
+      const newToken = tokenUtils.generateAuthTokens(userJson);
+      return { newToken };
     });
   });
 }
@@ -62,4 +62,4 @@ module.exports = {
   checkLogin,
   refresh,
   logOut
-}
+};
