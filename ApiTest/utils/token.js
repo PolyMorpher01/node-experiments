@@ -6,7 +6,7 @@ const REFRESH_TOKEN_SALT = process.env.REFRESH_TOKEN_SALT;
 
 module.exports = {
   generateAuthTokens(encryptedData) {
-    let accessToken = jwt.sign(
+    const accessToken = jwt.sign(
       {
         data: { payLoad: encryptedData }
       },
@@ -17,7 +17,7 @@ module.exports = {
   },
 
   generateRefreshToken(encryptedData) {
-    let refreshToken = jwt.sign(
+    const refreshToken = jwt.sign(
       {
         data: { payload: encryptedData }
       },
