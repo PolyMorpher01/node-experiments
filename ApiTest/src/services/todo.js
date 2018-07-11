@@ -3,6 +3,8 @@ const Boom = require('boom');
 const todoModel = require('../models/Todos');
 const tokenUtils = require('../utils/token');
 
+const errorMessages = require('../constants/errorMessages');
+
 function getAllList(userId) {
   return todoModel.fetchAll(userId);
 }
@@ -10,7 +12,7 @@ function getAllList(userId) {
 function getById(id, userId) {
   return todoModel.fetchById(id, userId).then(data => {
     if (!data) {
-      throw Boom.badRequest('Item does not exist');
+      throw Boom.badRequest(errorMessages.httpErr.badRequest);
     }
     return data;
   });
