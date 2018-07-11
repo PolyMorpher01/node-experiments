@@ -18,7 +18,7 @@ app.use('/api', routes);
 //Error Middlewares
 app.use(errorHandler.generic);
 
-const PORT = process.env.APP_PORT;
+const PORT = process.env.PORT || 8080;
 app.listen(PORT, () => {
   console.log('Listening to port: ' + PORT);
 });
