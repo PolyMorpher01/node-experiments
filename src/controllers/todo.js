@@ -18,7 +18,7 @@ router.get('/:id', authenticate, (req, res, next) => {
   todoService
     .getById(req.params.id, req.userId)
     .then(data => res.json(data))
-    .catch(err => res.json(err));
+    .catch(err => next(err));
 });
 
 //POST: /api/todos/
